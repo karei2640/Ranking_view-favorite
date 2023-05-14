@@ -14,7 +14,7 @@ end
 def favorite_index
     @name = Name.page(params[:page]).per(150)
     @favorite_names = Name.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:favorite_names_page]).per(150)
-    @favorite_gnames_all = Name.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:favorite_games_all_page]).per(150)
+    @favorite_gnames_all = Name.joins(:favorites).group(:id).order('count(favorites.id) desc').page(params[:favorite_names_all_page]).per(150)
     @favorite_gnames_monthly = Name.joins(:favorites).where(favorites: { created_at: 1.month.ago..Time.current }).group(:id).order('count(favorites.id) desc').page(params[:favorite_names_monthly_page]).per(150)
     @favorite_names_weekly = Name.joins(:favorites).where(favorites: { created_at: 1.week.ago..Time.current }).group(:id).order('count(favorites.id) desc').page(params[:favorite_names_weekly_page]).per(150)
     @favorite_names_daily = Name.joins(:favorites).where(favorites: { created_at: 1.day.ago..Time.current }).group(:id).order('count(favorites.id) desc').page(params[:favorite_names_daily_page]).per(150)

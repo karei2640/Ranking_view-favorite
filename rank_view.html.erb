@@ -1,0 +1,21 @@
+ #view_countsのそれぞれのランキング表示
+  <% if params[:ranking_period] == 'all' %>
+    <%= name.view_counts.count %>
+  <% elsif params[:ranking_period] == 'monthly' %>
+    <%= name.view_counts.where(created_at: Time.current.all_month).count %>
+  <% elsif params[:ranking_period] == 'weekly' %>
+    <%= name.view_counts.where(created_at: Time.current.all_week).count %>
+  <% else params[:ranking_period] == 'daily'%>
+    <%= name.view_counts.where(created_at: Time.zone.now.all_day).count %>
+  <% end %>
+  
+ #favorite_countsのそれぞれのランキング表示
+  <% if params[:ranking_period] == 'all' %>
+    <%= name.favorites.count %>
+  <% elsif params[:ranking_period] == 'monthly' %>
+    <%= name.favorites.where(created_at: Time.current.all_month).count %>
+  <% elsif params[:ranking_period] == 'weekly' %>
+    <%= name.favorites.where(created_at: Time.current.all_week).count %>
+  <% else params[:ranking_period] == 'daily'%>
+    <%= name.favorites.where(created_at: Time.zone.now.all_day).count %>
+  <% end %>
